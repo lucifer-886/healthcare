@@ -5,8 +5,8 @@ export const customerReviews = [
       "message": "Health Plus transformed my healthcare experience! The online consultations were so convenient, and the doctors were knowledgeable and caring."
     },
     {
-      "name": "Likit",
-      "location": "Bangalore,India",
+      "name": "Harshith",
+      "location": "Udupi,India",
       "message": "I found the perfect specialist for my condition through Health Plus. The personalized treatment plan made all the difference. Thank you for prioritizing my health!"
     },
     {
