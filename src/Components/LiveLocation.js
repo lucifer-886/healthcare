@@ -1,92 +1,50 @@
-import React, { Component } from 'react';
-import L from 'leaflet';
+import React, { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
 
-class LiveLocationMap extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      map: null,
-      marker: null,
-      circle: null,
-      zoomed: false,
+const LiveLocationTracker = () => {
+  const [position, setPosition] = useState([0, 0]);
+
+  useEffect(() => {
+    const success = (position) => {
+      const { latitude, longitude } = position.coords;
+      setPosition([latitude, longitude]);
     };
-  }
 
-  componentDidMount() {
-    const { map } = this.state;
-  
-    if (!map) {
-      const newMap = L.map('map');
-      newMap.setView([51.505, -0.09], 13);
-  
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      }).addTo(newMap);
-  
-      this.setState({ map: newMap });
-      this.watchUserLocation();
-    }
-  }
-  
-  
+    const error = (err) => {
+      console.error(err);
+    };
 
-  watchUserLocation() {
-    const { map } = this.state;
+    navigator.geolocation.getCurrentPosition(success, error, {
+      enableHighAccuracy: true,
+    });
+  }, []);
 
-    if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(
-        (pos) => this.success(pos),
-        (err) => this.error(err)
-      );
-    } else {
-      alert('Geolocation is not supported by your browser.');
-    }
-  }
+  const icon = L.icon({
+    iconUrl: "/path-to-your-marker-icon.png", // You can provide a custom marker icon
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+  });
 
-  success(pos) {
-    const { map, marker, circle, zoomed } = this.state;
-    const lat = pos.coords.latitude;
-    const lng = pos.coords.longitude;
-    const accuracy = pos.coords.accuracy;
-  
-    if (marker) {
-      map.removeLayer(marker);
-    }
-    if (circle) {
-      map.removeLayer(circle);
-    }
-  
-    const newMarker = L.marker([lat, lng]).addTo(map);
-    const newCircle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
-  
-    if (!zoomed) {
-      map.fitBounds(newCircle.getBounds());
-      this.setState({ zoomed: true });
-    }
-  
-    map.setView([lat, lng]);
-  
-    this.setState({ marker: newMarker, circle: newCircle });
-  }
-  
-  
-
-  error(err) {
-    if (err.code === 1) {
-      alert('Please allow geolocation access');
-    } else {
-      alert('Cannot get current location');
-    }
-  }
-
-  render() {
-    return (
-      <div id="map" style={{ height: '600px' }}>
-        {/* Map will be rendered here */}
+  return (
+    <div>
+      <h1>Live Location Tracker</h1>
+      <div className="map-container">
+        <MapContainer
+          center={position}
+          zoom={15}
+          style={{ height: "500px", width: "100%" }}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={position} icon={icon}>
+            <Popup>Your Location</Popup>
+          </Marker>
+        </MapContainer>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-export default LiveLocationMap;
+export default LiveLocationTracker;
