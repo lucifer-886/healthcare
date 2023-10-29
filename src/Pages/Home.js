@@ -7,7 +7,7 @@ import BookAppointment from "../Components/BookAppointment";
 import Reviews from "../Components/Reviews";
 import Doctors from "../Components/Doctors";
 import Footer from "../Components/Footer";
-
+import MedicinePrescription from "../Components/MedicinePrescription";
 function Home() {
   return (
     <div className="home-section">
@@ -17,6 +17,7 @@ function Home() {
       <About />
       <BookAppointment />
       <Reviews />
+      <MedicinePrescription/>
       <Doctors />
       <Footer />
     </div>

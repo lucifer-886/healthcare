@@ -62,6 +62,11 @@ function Navbar() {
             Doctors
           </a>
         </li>
+        <li>
+          <a href="#medical" className="navbar-links">
+            Medicines
+          </a>
+        </li>
       </ul>
 
       <button
@@ -108,6 +113,11 @@ function Navbar() {
           <li>
             <a onClick={openNav} href="#contact">
               Contact
+            </a>
+          </li>
+          <li>
+            <a onClick={openNav} href="#medical">
+              Medical
             </a>
           </li>
         </ul>

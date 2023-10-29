@@ -1,0 +1,64 @@
+.medicine-prescription-bg {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+  
+  .prescription-header {
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Times, serif';
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 600px;
+  }
+  
+  .medicine-card {
+    background-color: white;
+    transition: transform 0.2s;
+    margin-left: 150px;
+    margin-bottom: 20px;
+    width: 80%; /* Adjust card width */
+    border-radius: 10px; /* Keep the card as a box */
+    overflow: hidden; /* Clip content to stay within the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left; /* Align text to the left */
+    display: flex;
+    padding: 20px; /* Add padding for better spacing */
+    position: relative; /* Required for positioning the line */
+  }
+  
+  .medicine-image {
+    height: 300px;
+    width: 300px; /* Make the image square */
+    object-fit: cover;
+    margin-right: 20px; /* Add some space between the image and text */
+    margin-left: 400px;
+  }
+  
+  .medicine-details {
+    flex-grow: 1; /* Expand the details section to fill the remaining space */
+  }
+  
+  
+  .medicine-name {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 90px;
+
+  }
+  
+  .medicine-rating {
+    font-size: 20px;
+    font-weight: bold;
+    color: #666;
+  }
+  
+  .medicine-description {
+    font-size: 20px;
+    font-weight: normal;
+    color: #333;
+  }
+  
